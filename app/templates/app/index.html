@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} | Home {% endblock %}
+
+{% block content %}
+<div class="container">
+  {% include '_partials/messages.html'%}
+  <div class="text-center">
+    <h4>INVENTORY MANAGEMENT SYSTEM</h4><br>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md-6">
+
+      <a href="{% url 'sales' %}" class="btn btn-info btn-lg col-md-12 text-white" role="button"> Sales</a><br><br><br>
+      <a href="{% url 'inventory' %}" class="btn btn-info btn-lg col-md-12 text-white" role="button"> Inventory</a><br><br><br>
+      <a href="{% url 'sales_receipts' %}" class="btn btn-info btn-lg col-md-12 text-white" role="button"> Sales Receipts</a><br><br><br>
+      {% if user.is_superuser %}
+      <a href="{% url 'sales_stats' %}" class="btn btn-info btn-lg col-md-12 text-white" role="button"> Sales Statistics</a><br><br><br>
+      <a href="{% url 'profits' %}" class="btn btn-info btn-lg col-md-12 text-white" role="button"> Profits</a><br><br><br>
+      <a href="{% url 'dashboard' %}" class="btn btn-info btn-lg col-md-12 text-white" role="button">Dashboard</a><br><br><br>
+      {% endif %}
+    </div>
+    <div class="col-md-3">
+
+    </div>
+  </div><br>
+</div>
+
+{% endblock content %}

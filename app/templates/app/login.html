@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} | Home {% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    {% include '_partials/messages.html'%}
+    <div class="col-md-3">
+      
+    </div>
+    <div class="col-md-6">
+      
+      <form class="col-md-12 card float-center shadow-lg" action="{% url 'login' %}" method="post">
+        <div class="text-center">
+          <br><br><img class="img-fluid" src="{% static 'images/logo.jpeg' %}" width="300" height="200"/>
+        </div><hr>
+        {% csrf_token %}
+              <div class="form-group col-sm-12">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder='Enter your E-mail address' required>
+              </div>
+          <div class="form-group col-sm-12">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" name="password" placeholder="Enter your Password" required>
+            </div>
+          <div class="text-center">
+          <button type="submit" class="btn btn-success col-sm-4">Log in </button><hr>
+          
+            
+        
+          </div><br>
+      </form>
+    </div>
+    <div class="col-md-3">
+      
+    </div>
+  </div><br>
+</div>
+  
+{% endblock content %}

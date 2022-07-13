@@ -1,0 +1,135 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Timothy Madegwa">
+    
+    {% load static%}
+    <link rel="shortcut icon" href="{% static 'images/logo.jpeg'%}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css'%}">
+    <title>Inventory Management System {%block title %} {% endblock %} </title>
+  </head>
+  <body >
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
+        <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'images/logo.jpeg'%}" height="60"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          
+          <ul class="navbar-nav ml-auto navbar-dark">
+            <li class="nav-item nav-link">
+              
+              <a class="nav-link" href="{% url 'index' %}" style="color: white;"><strong>Home</strong></a>
+              
+            </li>
+            <li class="nav-item nav-link">
+            
+              <a class="nav-link" href="{% url 'sales' %}" style="color: white;"><strong>Sales</strong></a>
+              
+            </li>
+            <li class="nav-item nav-link">
+            
+              <a class="nav-link" href="{% url 'inventory' %}" style="color: white;"><strong>Inventory</strong></a>
+              
+            </li>
+            <li class="nav-item nav-link">
+            
+              <a class="nav-link" href="{% url 'sales_receipts' %}" style="color: white;"><strong>Receipts</strong></a>
+              
+            </li>
+            <li class="nav-item nav-link">
+            
+              <a class="nav-link" href="{% url 'dashboard' %}" style="color: white;"><strong>Dashboard</strong></a>
+              
+            </li>
+
+            {% if user.is_superuser %}
+            <li class="nav-item nav-link dropdown">
+            
+              <a class="nav-link dropdown-toggle" href="#statistics" data-toggle="dropdown" style="color: white;"><strong>Statistics</strong></a>
+              <div class="dropdown-menu bg-success" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="{% url 'sales_stats' %}" style="color: white;">Sales Statistics</a>
+                <a class="dropdown-item" href="{% url 'profits' %}" style="color: white;">Profits</a>
+              </div>
+              
+            </li>
+            {% endif %}
+            
+            <li class="nav-item nav-link">
+              <a class="nav-link" href="javascript:{document.getElementById('logout').submit()}"><strong><i class="fas fa-sign-out-alt"></i> Logout</strong></a>
+              <form action="{% url 'logout' %}" method="post" id="logout">
+                {% csrf_token %}
+                <input type="hidden">
+              </form>
+            </li>
+          </ul>
+       
+        </div>
+      </nav><br><br><br>
+    </div>
+      
+      
+<br><br>
+
+
+{% block content %}
+
+{% endblock content %}
+<script>
+  setTimeout(function(){
+    if($('#msg').length > 0) {
+      $('#msg').remove();
+    }
+  }, 5000)
+</script>
+
+
+</body>
+
+<!-- Footer -->
+<footer class="page-footer font-large pt-4 footer bg-success">
+
+  <!-- Footer Elements -->
+  <div class="container">
+
+    <!-- Social buttons -->
+    <ul class="list-unstyled list-inline text-center">
+
+      <li class="list-inline-item">
+        <a class="btn-floating btn-tw mx-1" href="mailto:info@aqila.co.ke" target="_blank" style="color: white;">
+          <i class="far fa-envelope fa-lg"> </i> info@aqila.co.ke
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="btn-floating btn-gplus mx-1" href="tel:+254712345678" style="color: white;">
+          <i class="fas fa-phone-square fa-lg"> +254789478763 </i>
+        </a>
+      </li>
+
+    </ul>
+    <!-- Social buttons -->
+
+  </div>
+  <!-- Footer Elements -->
+
+  <!-- Copyright -->
+
+  <div class="footer-copyright text-center py-3">
+    <p style="color: white;">© 2021 Inventory Management System. All Rights Reserved<br> Powered by <a
+        href="https://aqila.co.ke" target="_blank">Aqila</a></p>
+
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+
+</html>

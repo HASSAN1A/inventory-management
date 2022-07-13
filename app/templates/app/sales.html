@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} | Sales {% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="text-center">
+      {% include '_partials/messages.html'%}
+        <h4>SALES</h4><br>
+        
+    </div>
+  <div class="row">
+    <div class="col-lg-7">
+      {% if inventory %}
+      <div class="text-center">
+        <p class="text-center">Select items for sale
+          <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for name.."><br></p>
+        <table class="table table-hover table-responsive" id="invTable">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Product ID</th>
+              <th scope="col">Available</th>
+              <th scope="col">Description</th>
+              <th scope="col">Unit Price</th>
+              <th scope="col">Add</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for inv in inventory%}
+            <tr>
+              <td class="sales-item-title">{{ inv.name }}</td>
+              <td class="sales-item-id text-right" scope="row">{{inv.id}}</td>
+              <td class="sales-item-quantity text-right">{{ inv.quantity }}</td>
+              <td>{{ inv.description}}</td>
+              <td class="sales-item-price text-right">{{inv.price}}</td>
+              <td><button class="btn btn-success btn-sm sales-item-button"> Sell</button></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table><hr>   
+    </div>
+    {% else %}
+
+    <p class="text-center">No Inventory to display </p><br><br>
+
+    {% endif %}
+
+    </div>
+    <div class="col-lg-5">
+      <p class="text-center">Cart</p>
+      <form class="cart-form" action="checkout" method="post">
+        {% csrf_token %}
+        <table class="table table-hover table-responsive cart-items">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">Item id</th>
+              <th scope="col">Name</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Unit Price</th>
+              <th scope="col">Sub Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+          </tbody>
+        </table><hr>
+        <div class="cart-total ml-auto">
+          <div class="row">
+          <div class="col-md-6">
+            <strong>Discount</strong>
+             <input class="form-control cart-quantity-discount" name="discount" type="number" min="0" value="0">
+          </div>
+          <div class="col-md-6">
+            <strong>Payment Method</strong>
+            <select name="payment_method" class="form-control">
+            <option value="CASH">Cash</option>
+            <option value="CARD">Credit/Debit card</option>
+            <option value="M-PESA">M-Pesa</option>
+            <option value="OTHER">Other</option>
+          </select>
+          </div>
+        </div>
+          <hr>
+          <strong class="cart-total-title">Total
+          <span class="cart-total-price">KES 0</span></strong>
+        </div>
+        <button type="submit" class="btn btn-success btn-lg" onclick="return confirm('Are you sure you want to checkout these items?');">Check Out</button>
+      </form>
+      
+      </div>
+    
+  </div><br>
+  <script src="{% static 'js/store.js' %}" async></script>
+  <script src="{% static 'js/nameSearch.js' %}" async></script></script>
+</div>
+
+{% endblock content %}

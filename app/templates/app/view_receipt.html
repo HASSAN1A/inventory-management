@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %} | Receipt # {{order.id}} {% endblock %}
+
+{% block content %}
+<div class="container">
+    {% include '_partials/reciept.html' %}
+</div>
+{% endblock %}

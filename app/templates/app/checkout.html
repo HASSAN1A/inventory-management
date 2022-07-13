@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %} | Checkout {% endblock %}
+
+{% block content %}
+
+<div class="container" >
+    {% include '_partials/messages.html'%}
+  {% include '_partials/reciept.html' %}
+</div>
+
+
+{% endblock content %}

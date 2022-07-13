@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %} | Edit Receipt #{{order.id}} {% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="text-center">
+    {% include '_partials/messages.html'%}
+  </div>
+    <h3>Order #{{order.id}}</h3>
+    <form action="{% url 'edit_receipt' order.id %}" method="post">
+        {% csrf_token %}
+        {% for item in order.items.all %}          
+        <div class="form-row">              
+          <div class="form-group col-md-4">
+            <label for="name">Item Name</label>
+            <input name="name" type="text" class="form-control" value="{{ item.item.name}}" disabled>
+            <input name="sale_item_id" type="text" class="form-control" value="{{ item.id }}" hidden>
+              
+          </div>
+          <div class="form-group col-md-2">
+            <label for="oq">Current Quantity</label>
+            <input name="oq" type="number" class="form-control" value="{{ item.quantity_sold }}" disabled>
+            <input name="oq" type="number" class="form-control" value="{{ item.quantity_sold }}" hidden>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="nq">New Quantity</label>
+            <input name="nq" type="number" min="0" class="form-control" value="{{ item.quantity_sold }}" max="{{ item.quantity_sold }}" required>
+          </div>
+          
+        </div><hr>
+        {% endfor %}
+        <div>
+          <p>DISCOUNT OFFERED ON INITIAL SALE = {{order.discount}}</p>
+        </div>
+        <div class="form-group col-md-2"><br>
+            <button type="submit" class="btn btn-info" onclick="return confirm('Are you sure you want to confirm the changes?');">Confirm</button>
+        </div>
+      </form>
+
+</div>
+{% endblock %}

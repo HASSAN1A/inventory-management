@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %} | Sales Dashboard {% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <h4 class="text-center">SALES DASHBOARD</h4><br>
+  <div class="row">
+    <div class="col-md-4 text-center">
+      <h5>Daily Summary</h5>
+      <table class="table table-hover table-responsive text-center">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Summary</th>
+            <th scope="col">{{ daily.date }} - to date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Order items sold</td>
+            <td>{{ daily.daily_count }}</td>
+          </tr>
+          <tr>
+            <td>Value of items sold</td>
+            <td>{{ daily.daily_total | intcomma}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-4 text-center">
+      
+      <h5>Weekly Summary</h5>
+      <table class="table table-hover table-responsive text-center">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Summary</th>
+            <th scope="col">{{ weekly.date }} - to date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Order items sold</td>
+            <td>{{ weekly.weekly_count }}</td>
+          </tr>
+          <tr>
+            <td>Value of items sold</td>
+            <td>{{ weekly.weekly_total | intcomma}}</td>
+          </tr>
+        </tbody>
+      </table>      
+    </div>
+
+    <div class="col-md-4 text-center">
+      <h5>Monthly Summary</h5>
+      <table class="table table-hover table-responsive text-center">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Summary</th>
+            <th scope="col">{{ monthly.date }} - to date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Order items sold</td>
+            <td>{{ monthly.monthly_count }}</td>
+          </tr>
+          <tr>
+            <td>Value of items sold</td>
+            <td>{{ monthly.monthly_total | intcomma}}</td>
+          </tr>
+        </tbody>
+      </table>      
+    </div>      
+    </div>
+    <div class="row">
+      <div class="col-md-4 text-center">
+        <h5>Quarterly Summary</h5>
+        <table class="table table-hover table-responsive text-center">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">Summary</th>
+              <th scope="col">{{ quarterly.date }} - to date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Order items sold</td>
+              <td>{{ quarterly.quarterly_count }}</td>
+            </tr>
+            <tr>
+              <td>Value of items sold</td>
+              <td>{{ quarterly.quarterly_total | intcomma}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <div class="col-md-4 text-center">
+        
+        <h5>Half Year Summary</h5>
+        <table class="table table-hover table-responsive text-center">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">Summary</th>
+              <th scope="col">{{ half_year.date }} - to date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Order items sold</td>
+              <td>{{ half_year.half_year_count }}</td>
+            </tr>
+            <tr>
+              <td>Value of items sold</td>
+              <td>{{ half_year.half_year_total | intcomma}}</td>
+            </tr>
+          </tbody>
+        </table>      
+      </div>
+  
+      <div class="col-md-4 text-center">
+        <h5>Yearly Summary</h5>
+        <table class="table table-hover table-responsive text-center">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">Summary</th>
+              <th scope="col">{{ yearly.date }} - to date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Order items sold</td>
+              <td>{{ yearly.yearly_count }}</td>
+            </tr>
+            <tr>
+              <td>Value of items sold</td>
+              <td>{{ yearly.yearly_total | intcomma}}</td>
+            </tr>
+          </tbody>
+        </table>      
+      </div>      
+      </div>
+  </div>
+  
+<br>
+  
+{% endblock content %}

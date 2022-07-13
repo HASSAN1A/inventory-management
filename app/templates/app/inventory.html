@@ -1,0 +1,212 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %} | Inventory {% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="text-center">
+    {% include '_partials/messages.html'%}
+    <h4>INVENTORY</h4><br>
+    <div class="row">
+      <div class="col-md-4">
+        <button type="button" class="btn btn-info btn-lg btn-block" data-toggle="collapse" href="#inventory">Check
+          Inventory</button><br><br><br>
+
+      </div>
+      <div class="col-md-4">
+
+        <button type="button" class="btn btn-info btn-lg btn-block" data-toggle="collapse" href="#addInventory">Add to
+          Inventory</button><br><br><br>
+      </div>
+      <div class="col-md-4">
+        <button type="button" class="btn btn-info btn-lg btn-block" data-toggle="collapse"
+          href="#reconciliation">Reconciliation</button><br><br><br>
+      </div>
+    </div>
+    <hr>
+
+
+    <div class="collapse" id="inventory">
+      <p class="text-center">
+      <h4>INVENTORY</h4>
+      </p>
+      {% if inventory %}
+      <p> <label for="search">Search inventory</label>
+        <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search by name.."><br>
+      </p>
+      <table class="table table-hover table-responsive text-right" id="invTable">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Product ID</th>
+            <th scope="col">Product group</th>
+            <th scope="col">Description</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Cost Price</th>
+            <th scope="col">Total</th>
+            <th scope="col">% age of Inventory</th>
+          </tr>
+        </thead>
+        <tbody class="inventory-table">
+          {% for inv in inventory%}
+          {% if inv.quantity > 9 %}
+          <tr class="inventory-row">
+            {% else %}
+          <tr class="inventory-row alert-danger">
+            {% endif %}
+            <td>{{ inv.name }}</td>
+            <td>{{ inv.id }}</td>
+            <td>{{ inv.product_group }}</td>
+            <td>{{ inv.description}}</td>
+            <td class="inventory-quantity text-right">{{inv.quantity }}</td>
+            <td class="inventory-price text-right">{{inv.cost_price | intcomma}}</td>
+            <td class="inventory-item-totals text-right">{{ inv.total }}</td>
+            <td class="inventory-percentage text-right"></td>
+          </tr>
+          {% endfor %}
+          <tr>
+            <th class="text-center" colspan="6">Total</th>
+            <th class="invTotal"></th>
+          </tr>
+
+        </tbody>
+      </table>
+      <hr><br><br>
+      {% else %}
+
+      <p>No Inventory to display </p>
+      <hr><br><br>
+
+      {% endif %}
+
+    </div>
+
+
+    <div class="collapse" id="addInventory">
+      <p class="text-center">
+      <h4>ADD INVENTORY</h4>
+      </p>
+      <form action="{% url 'inventory' %}" method="post">
+        {% csrf_token %}
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="name">Name</label>
+            <select name="name" id="name" class="form-control" required>
+              <option selected>Choose...</option>
+              {% for inv in inventory %}
+              <option value="{{inv.name}}">{{ inv.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="quantity">Quantity</label>
+            <input name="quantity" type="number" min="1" class="form-control" id="quantity" required>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="value">Value of Goods</label>
+            <input name="value" type="number" min="1" class="form-control" id="value" required>
+          </div>
+          <div class="form-group col-md-2"><br>
+            <button type="submit" class="btn btn-info"
+              onclick="return confirm('Are you sure you want to update this item?');">Add to inventory</button>
+          </div>
+        </div>
+      </form><br><br>
+      <div class="row">
+        <div class="col-md-2">
+
+        </div>
+        <div class="col-md-8">
+          <p>
+          <h5>Latest inventory updates</h5>
+          </p>
+          {% if inventory_update %}
+          <table class="table table-hover table-responsive text-right" id="invTable">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Increment</th>
+                <th scope="col">Username</th>
+                <th scope="col">Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for invs in inventory_update %}
+              <tr class="inventory-row">
+                <td>{{ invs.name }}</td>
+                <td>{{ invs.increment }}</td>
+                <td>{{ invs.user}}</td>
+                <td>{{ invs.date}}</td>
+              </tr>
+              {% endfor %}
+
+            </tbody>
+          </table>
+          <hr><br><br>
+          {% else %}
+          <p>No recent inventory updates</p>
+          <hr><br><br>
+          {% endif %}
+
+        </div>
+        <div class="col-md-2">
+
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="collapse" id="reconciliation">
+      <p class="text-center">
+      <h4>RECONCILIATION</h4>
+      </p>
+      {% if inventory %}
+      <table class="table table-hover table-responsive text-right" id="reconciliation-table">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Product ID</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Physical count</th>
+            <th scope="col">Variance</th>
+            <th scope="col">Cost Price</th>
+            <th scope="col">Value of Variance</th>
+          </tr>
+        </thead>
+        <tbody class="reconciliation-table">
+          {% for inv in inventory %}
+          <tr class="inventory-row">
+            <td>{{ inv.name }}</td>
+            <td>{{ inv.id }}</td>
+            <td class="inventory-quantity">{{ inv.quantity }}</td>
+            <td><input class="inventory-input" type="number" min="1" class="form-control" id="count"></td>
+            <td class="inventory-variance">0</td>
+            <td class="inventory-price">{{ inv.cost_price }}</td>
+            <td class="inventory-variance-total">0</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <button id="download" class="btn btn-info">DOWNLOAD AS PDF</button>
+      <hr>
+      {% else %}
+
+      <p>No Inventory to display </p>
+
+      {% endif %}
+
+    </div>
+  </div>
+  <br>
+  <script src="{% static 'js/inventory.js' %}" async></script>
+  <script src="{% static 'js/pdf.js' %}"></script>
+  <script src="{% static 'js/nameSearch.js' %}" async></script>
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+
+</div>
+
+{% endblock content %}
