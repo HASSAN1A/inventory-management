@@ -1,0 +1,50 @@
+{% extends 'dashboard/base.html' %} {% load static %} 
+
+{% block content %}
+<i class="fas fa-bars" id="menu"></i>
+<div class="d-lg-flex justify-content-between align-items-center mb-5">
+  <h2 id="section-heading" class="bold text-right">Best-selling</h2>
+  <div class="d-flex" id="time-section">
+    <div class="time-tab" id="week">Week</div>
+    <div class="time-tab time-tab-outline" id="month">Month</div>
+    <div class="time-tab" id="annual">Annual</div>
+  </div>
+</div>
+
+<hr class="divider mb-5">
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="chart-container w-100" style="min-width: 0px">
+        <canvas id="bestSellingProducts"></canvas>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="chart-container w-100" style="min-width: 0px">
+        <canvas id="bestSellingProducts2"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container mt-5">
+  <div class="heading">Best-Selling Products <span id="bestselling-period">This Month</span></div>
+  <table class="table" id="productList">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col" style="color: #4a4a4a">Product</th>
+        <th scope="col" style="color: #4a4a4a">Items Sold</th>
+        <th scope="col" class="d-none d-md-table-cell" style="color: #4a4a4a">Price</th>
+        <th scope="col" class="d-none d-md-table-cell" style="color: #4a4a4a">Total</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+{% endblock content %} {% block scripts %} {{ block.super }}
+<script src="{% static 'js/bestselling.js' %}"></script>
+<script>
+  let link = $("div.sidebar-label#bestselling-label");
+  link.addClass("active-label");
+</script>
+{% endblock scripts %}

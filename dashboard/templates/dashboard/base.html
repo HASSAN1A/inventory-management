@@ -1,0 +1,58 @@
+{% load bootstrap4 %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {%if title%}
+    <title>{{title}}</title>
+    {%endif%}
+
+    {% block styles %}
+    {% bootstrap_css %}
+    <link href="{% static 'fontawesome_free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {% endblock styles %}
+
+</head>
+<body>
+    <div class="d-flex position-relative">
+        {% include 'dashboard/sidebar.html' %}
+        <div id="sidebar-spill"></div>
+        <div class="main-bar">
+            {% block content %}
+            {%endblock%}
+        </div>
+    </div>
+
+
+    {% block scripts %}
+    {% bootstrap_javascript jquery='full'%}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
+        integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg=="
+        crossorigin="anonymous"></script>
+    <script>
+        {% comment %} Function for controlling the width of the sidebar {% endcomment %}
+        $(document).ready(function () {
+            let iconLabels = $('.icon-label')
+
+            if (window.innerWidth < 768) {
+                iconLabels.hide()
+                window.onresize = () => {
+                    if (window.innerWidth < 768) {
+                        iconLabels.hide()
+                    }
+                    else {
+                        iconLabels.show()
+                    }
+                }
+            }
+        })
+    </script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    {% endblock %}
+</body>
+</html>

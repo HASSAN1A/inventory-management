@@ -1,0 +1,130 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block styles %}
+{{block.super}}
+<style>
+    tr.product {
+        cursor: pointer;
+        transition: 300ms;
+    }
+
+    tr.product:hover {
+        color: white;
+        background-color: #3BA745;
+    }
+
+    div#product-details {
+        padding: 30px;
+        border-radius: 10px;
+        border: 1px solid #cccccc;
+        display: none;
+    }
+
+    .desc {
+        font-size: 0.8rem;
+        color: #75797D;
+        font-weight: 900;
+        text-transform: uppercase;
+    }
+    div.chart-container {
+        position: relative;
+        /* height: 100%; */
+        min-height: 100%;
+    }
+</style>
+{% endblock styles %}
+
+{% block content %}
+<i class="fas fa-bars" id="menu"></i>
+<div class="d-sm-flex justify-content-between align-items-center mb-5">
+  <h2 id="section-heading" class="bold">Products</h2>
+  <div class="d-flex" id="time-section">
+    <div class="time-tab time-tab-outline" id="week">Week</div>
+    <div class="time-tab" id="month">Month</div>
+    <div class="time-tab" id="annual">Annual</div>
+  </div>
+</div>
+
+<h5 id="product-loading" class="text-muted ml-4" style="font-weight: 600; display: none;">Loading...</h5>
+<div class="container mb-5" id="product-details">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div id="product-title" class="m-0 heading" style="font-size: 1.5rem;"></div>
+                <div id="product-category" class="font-weight-bold text-uppercase small text-muted"></div>
+            </div>
+            <div id="product-description" class="mb-5"></div>
+            <div class="d-lg-flex flex-wrap">
+                <div class="info-bubble mr-md-4 mb-3">
+                    <div class="title">Price</div>
+                    <div>Ksh. <span id="product-price"></span></div>
+                </div>
+                <div class="info-bubble mr-md-4 mb-3">
+                    <div class="title">In Stock</div>
+                    <div id="product-stock"></div>
+                </div>
+                <div class="info-bubble mr-md-4 mb-3">
+                    <div class="title">Total revenue</div>
+                    <div id="product-total-revenue"></div>
+                </div>
+                <div class="info-bubble mr-md-4 mb-3">
+                    <div class="title">Units Sold</div>
+                    <div id="product-total-orders"></div>
+                </div>
+                <div class="info-bubble mr-md-4 mb-3">
+                    <div class="title">No. of Returns</div>
+                    <div id="product-returns"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="chart-container">
+                        <canvas id="product-revenue"></canvas>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="chart-container">
+                        <canvas id="product-orders"></canvas>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="container p-0 mt-3">
+    <input class="form-control" type="text" name="search" id="search" placeholder="Search products..."><br>
+    <table class="table" id="stockProducts">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col" style="color: #4a4a4a">Product</th>
+                <th scope="col" style="color: #4a4a4a">Description</th>
+                <th scope="col" style="color: #4a4a4a">Category</th>
+                <th scope="col" style="color: #4a4a4a">In Stock</th>
+                <th scope="col" style="color: #4a4a4a">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <div class="mt-5 d-flex">
+        <button class="btn btn-primary mr-auto" style="font-weight: 600; font-size: 0.8rem;" id="previous">Previous
+            Page</button>
+        <button class="btn btn-success ml-auto" style="font-weight: 600; font-size: 0.8rem;" id="next">Next
+            Page</button>
+    </div>
+</div>
+
+{% endblock content %} {% block scripts %} {{ block.super }}
+<script src="{% static 'js/products.js' %}"></script>
+<script>
+  let link = $("div.sidebar-label#products-label");
+  link.addClass("active-label");
+</script>
+{% endblock %}

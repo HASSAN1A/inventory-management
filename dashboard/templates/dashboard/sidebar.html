@@ -1,0 +1,49 @@
+{% load static %}
+
+<div class="">
+  <div id="sidebar">
+    <i class="fas fa-times" id="close"></i>
+    <div class="sidebar-image">
+      <img src="{% static 'images/logo.jpeg' %}" class="img-fluid" alt="" />
+    </div>
+    <div class="sidebar-heading">Dashboard</div>
+    <div class="sidebar-links">
+      <div class="sidebar-label" id="overview-label">
+        <a href="{% url 'dashboard' %}">
+          <i class="fas fa-chart-pie"></i>
+          <span>Overview</span>
+        </a>
+      </div>
+      <div class="sidebar-label" id="bestselling-label">
+        <a href="{% url 'bestselling' %}">
+          <i class="fas fa-chart-line"></i>
+          <span>Best-selling</span>
+        </a>
+      </div>
+      <div class="sidebar-label" id="products-label">
+        <a href="{% url 'products' %}">
+          <i class="fas fa-box-open"></i>
+          <span>Products</span>
+        </a>
+      </div>
+    </div>
+    <div class="sidebar-heading">Site Links</div>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'index' %}">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'sales' %}">Sales</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'inventory' %}">Inventory</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'sales_receipts' %}">Receipts</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" style="color: #FFFFFFAA;" href="{% url 'sales_receipts' %}">Log Out<i class="fas fa-sign-out-alt ml-3"></i></a>
+      </li>
+    </ul>
+  </div>
+</div>
