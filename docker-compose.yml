@@ -1,0 +1,26 @@
+version: '3'
+services:
+  db:
+    image: mysql:8
+    ports:
+      - "3306:3306"
+    environment:
+      - DB_PASSWORD='kopudoju1A*123'
+      - MYSQL_DATABASE='inventory'
+      - MYSQL_USER='juma'
+      - MYSQL_PASSWORD='kopudoju1A*123'
+      - MYSQL_ROOT_PASSWORD='kopudoju1A*123'
+      - MYSQL_HOST=''
+    volumes:
+      - /tmp/app/mysqld:/var/run/mysqld
+      - "./docker-entrypoint-initdb.d/init_db.sh:./docker-entrypoint-initdb.d/init_db.sh"
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      - /tmp/app/mysqld:/run/mysqld
+    depends_on:
+      - db
