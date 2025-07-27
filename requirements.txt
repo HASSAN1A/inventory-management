@@ -14,7 +14,7 @@ django-environ==0.4.5
 django-import-export==2.5.0
 django-restframework==0.0.1
 djangorestframework==3.12.2
-djangorestframework-simplejwt==4.4.0
+djangorestframework-simplejwt==5.5.1
 drf-yasg==1.20.0
 et-xmlfile==1.0.1
 fontawesome-free==5.15.1
@@ -68,7 +68,7 @@ django-environ==0.4.5
 django-import-export==2.5.0
 django-restframework==0.0.1
 djangorestframework==3.12.2
-djangorestframework-simplejwt==4.4.0
+djangorestframework-simplejwt==5.5.1
 drf-yasg==1.20.0
 et-xmlfile==1.0.1
 fontawesome-free==5.15.1
@@ -122,7 +122,7 @@ django-environ==0.4.5
 django-import-export==2.5.0
 django-restframework==0.0.1
 djangorestframework==3.12.2
-djangorestframework-simplejwt==4.4.0
+djangorestframework-simplejwt==5.5.1
 drf-yasg==1.20.0
 et-xmlfile==1.0.1
 fontawesome-free==5.15.1
