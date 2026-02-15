@@ -5,7 +5,7 @@ cffi==1.15.0
 chardet==3.0.4
 coreapi==2.3.3
 coreschema==0.0.4
-cryptography==35.0.0
+cryptography==46.0.5
 defusedxml==0.6.0
 diff-match-patch==20200713
 Django==3.1.5
@@ -59,7 +59,7 @@ cffi==1.15.0
 chardet==3.0.4
 coreapi==2.3.3
 coreschema==0.0.4
-cryptography==35.0.0
+cryptography==46.0.5
 defusedxml==0.6.0
 diff-match-patch==20200713
 Django==3.1.5
@@ -113,7 +113,7 @@ cffi==1.15.0
 chardet==3.0.4
 coreapi==2.3.3
 coreschema==0.0.4
-cryptography==35.0.0
+cryptography==46.0.5
 defusedxml==0.6.0
 diff-match-patch==20200713
 Django==3.1.5
